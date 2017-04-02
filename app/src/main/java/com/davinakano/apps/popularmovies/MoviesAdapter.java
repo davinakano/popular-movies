@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by davinakano on 02/04/2017.
@@ -13,19 +16,22 @@ import android.widget.TextView;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdapterViewHolder>{
 
-    private String[] mMovieData;
+    private Movie[] mMovieData;
+    private Context mContext;
 
-    public MoviesAdapter() {
-
+    public MoviesAdapter(Context context) {
+        mContext = context;
     }
 
     public class MoviesAdapterViewHolder extends RecyclerView.ViewHolder {
 
         public final TextView mMovieNameTextView;
+        public final ImageView mMovieCoverImageView;
 
         public MoviesAdapterViewHolder(View itemView) {
             super(itemView);
             mMovieNameTextView = (TextView) itemView.findViewById(R.id.tv_movie_name);
+            mMovieCoverImageView = (ImageView) itemView.findViewById(R.id.iv_movie_cover);
         }
     }
 
@@ -41,8 +47,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
 
     @Override
     public void onBindViewHolder(MoviesAdapterViewHolder holder, int position) {
-        String movieName = mMovieData[position]; // TODO: This needs to be changed later
-        holder.mMovieNameTextView.setText(movieName);
+        Movie movie = mMovieData[position];
+        holder.mMovieNameTextView.setText(movie.name);
+        Picasso.with(mContext).load(movie.imageUrl).into(holder.mMovieCoverImageView);
     }
 
     @Override
@@ -53,8 +60,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
         return 0;
     }
 
-    // TODO: This parameter needs to be changed later
-    public void setMovieData(String[] movieData) {
+    public void setMovieData(Movie[] movieData) {
         mMovieData = movieData;
         notifyDataSetChanged();
     }

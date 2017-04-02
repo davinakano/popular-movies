@@ -31,11 +31,16 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(false);
 
-        mMoviesAdapter = new MoviesAdapter();
+        mMoviesAdapter = new MoviesAdapter(this);
         mRecyclerView.setAdapter(mMoviesAdapter);
 
         // TODO: Remove fake data
-        String[] fakeData = {"Moana", "La La Land", "Moonlight", "Madagascar", "Taken", "The Arrival"};
+        Movie[] fakeData = {
+                new Movie("Moana", "http://images6.fanpop.com/image/photos/39800000/Moana-Book-Cover-disneys-moana-39830830-338-500.jpg"),
+                new Movie("La La Land", "https://www.ost.co/img/209740.jpg"),
+                new Movie("Taken 2", "http://pinoyexchange.net/pexmoviepromo/promo_list/Taken2/images/movieimage-synopsis.jpg"),
+                new Movie("Moonlight", "https://www.cinematerial.com/media/posters/md/pm/pmx5eoj1.jpg?v=1481217882")
+        };
         mMoviesAdapter.setMovieData(fakeData);
         showMoviesDataView();
     }
