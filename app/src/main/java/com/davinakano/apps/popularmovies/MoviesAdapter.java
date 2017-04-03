@@ -10,14 +10,17 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 /**
  * Created by davinakano on 02/04/2017.
  */
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdapterViewHolder>{
 
-    private Movie[] mMovieData;
+    private List<Movie> mMovieData;
     private Context mContext;
+    private final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w185/";
 
     public MoviesAdapter(Context context) {
         mContext = context;
@@ -47,20 +50,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
 
     @Override
     public void onBindViewHolder(MoviesAdapterViewHolder holder, int position) {
-        Movie movie = mMovieData[position];
-        holder.mMovieNameTextView.setText(movie.name);
-        Picasso.with(mContext).load(movie.imageUrl).into(holder.mMovieCoverImageView);
+        Movie movie = mMovieData.get(position);
+        holder.mMovieNameTextView.setText(movie.getTitle());
+        Picasso.with(mContext).load(IMAGE_BASE_URL + movie.getPosterPath()).into(holder.mMovieCoverImageView);
     }
 
     @Override
     public int getItemCount() {
         if (mMovieData != null) {
-            return mMovieData.length;
+            return mMovieData.size();
         }
         return 0;
     }
 
-    public void setMovieData(Movie[] movieData) {
+    public void setMovieData(List<Movie> movieData) {
         mMovieData = movieData;
         notifyDataSetChanged();
     }

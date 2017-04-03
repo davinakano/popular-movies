@@ -22,7 +22,6 @@
         android:id="@+id/pb_loading"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:layout_gravity="center"
-        android:visibility="invisible"/>
+        android:layout_gravity="center"/>
 
 </FrameLayout>

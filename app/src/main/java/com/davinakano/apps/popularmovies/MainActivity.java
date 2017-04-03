@@ -8,6 +8,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
@@ -15,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mErrorMessageTextView;
     private ProgressBar mLoadingProgressBar;
+
+    private final String API_KEY = "ENTER YOUR KEY HERE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +42,29 @@ public class MainActivity extends AppCompatActivity {
         mMoviesAdapter = new MoviesAdapter(this);
         mRecyclerView.setAdapter(mMoviesAdapter);
 
-        // TODO: Remove fake data
-        Movie[] fakeData = {
-                new Movie("Moana", "http://images6.fanpop.com/image/photos/39800000/Moana-Book-Cover-disneys-moana-39830830-338-500.jpg"),
-                new Movie("La La Land", "https://www.ost.co/img/209740.jpg"),
-                new Movie("Taken 2", "http://pinoyexchange.net/pexmoviepromo/promo_list/Taken2/images/movieimage-synopsis.jpg"),
-                new Movie("Moonlight", "https://www.cinematerial.com/media/posters/md/pm/pmx5eoj1.jpg?v=1481217882")
-        };
-        mMoviesAdapter.setMovieData(fakeData);
-        showMoviesDataView();
+        // Retrofit setup
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        MovieDBAPI client = retrofit.create(MovieDBAPI.class);
+        Call<PopularMoviesPayload> call = client.getPopularMovies(API_KEY);
+
+        call.enqueue(new Callback<PopularMoviesPayload>() {
+            @Override
+            public void onResponse(Call<PopularMoviesPayload> call, Response<PopularMoviesPayload> response) {
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                showMoviesDataView();
+                mMoviesAdapter.setMovieData(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<PopularMoviesPayload> call, Throwable t) {
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                showErrorMessage();
+            }
+        });
+
     }
 
     private void showMoviesDataView() {
