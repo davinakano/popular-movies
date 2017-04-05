@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mErrorMessageTextView;
     private ProgressBar mLoadingProgressBar;
 
-    private final String API_KEY = "ENTER YOUR KEY HERE";
+    private static final String API_KEY = BuildConfig.API_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
