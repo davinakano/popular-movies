@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -68,6 +70,33 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int optionSelected = item.getItemId();
+
+        if (optionSelected == R.id.action_sort_rating) {
+            mMoviesAdapter.sortByRating();
+            return true;
+        } else if (optionSelected == R.id.action_sort_release_date) {
+            mMoviesAdapter.sortByReleaseDate();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(Movie m) {
+        Intent i = new Intent(this, MovieDetailsActivity.class);
+        i.putExtra(Intent.EXTRA_PACKAGE_NAME, m);
+        startActivity(i);
+    }
+
     private void showMoviesDataView() {
         mRecyclerView.setVisibility(View.VISIBLE);
         mErrorMessageTextView.setVisibility(View.INVISIBLE);
@@ -76,12 +105,5 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     private void showErrorMessage() {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mErrorMessageTextView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onClick(Movie m) {
-        Intent i = new Intent(this, MovieDetailsActivity.class);
-        i.putExtra(Intent.EXTRA_PACKAGE_NAME, m);
-        startActivity(i);
     }
 }
