@@ -1,5 +1,6 @@
 package com.davinakano.apps.popularmovies;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
     @Override
     public void onClick(Movie m) {
-        Toast.makeText(this, m.getTitle(), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, MovieDetailsActivity.class);
+        startActivity(i);
     }
 }
