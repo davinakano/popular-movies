@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.davinakano.apps.popularmovies.Data.Movie;
+import com.davinakano.apps.popularmovies.Data.NetworkUtils;
+import com.davinakano.apps.popularmovies.Data.PopularMoviesPayload;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterClickHandler {
 
@@ -42,17 +44,13 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(false);
 
+        // Adapter setup
         mMoviesAdapter = new MoviesAdapter(this, this);
         mRecyclerView.setAdapter(mMoviesAdapter);
 
-        // Retrofit setup
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
-        MovieDBAPI client = retrofit.create(MovieDBAPI.class);
-        Call<PopularMoviesPayload> call = client.getPopularMovies(API_KEY);
+        Call<PopularMoviesPayload> call = NetworkUtils.retrofitGetPopularMovies();
 
+        // Async call using Retrofit
         call.enqueue(new Callback<PopularMoviesPayload>() {
             @Override
             public void onResponse(Call<PopularMoviesPayload> call, Response<PopularMoviesPayload> response) {
