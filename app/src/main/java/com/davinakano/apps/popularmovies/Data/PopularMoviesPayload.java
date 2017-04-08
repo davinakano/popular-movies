@@ -1,5 +1,6 @@
-package com.davinakano.apps.popularmovies;
+package com.davinakano.apps.popularmovies.Data;
 
+import com.davinakano.apps.popularmovies.Data.Movie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

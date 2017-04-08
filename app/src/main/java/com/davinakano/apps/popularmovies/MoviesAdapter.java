@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.davinakano.apps.popularmovies.Data.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
@@ -30,6 +31,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
         mClickHandler = clickHandler;
     }
 
+    // To facilitate the click handler on Activity
     public interface MoviesAdapterClickHandler {
         void onClick(Movie m);
     }
