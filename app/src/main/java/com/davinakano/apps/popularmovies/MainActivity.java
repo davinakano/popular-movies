@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -82,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     @Override
     public void onClick(Movie m) {
         Intent i = new Intent(this, MovieDetailsActivity.class);
+        i.putExtra(Intent.EXTRA_PACKAGE_NAME, m);
         startActivity(i);
     }
 }

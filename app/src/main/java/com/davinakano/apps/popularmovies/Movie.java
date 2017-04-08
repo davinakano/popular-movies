@@ -3,11 +3,13 @@ package com.davinakano.apps.popularmovies;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by davinakano on 02/04/2017.
  */
 
-public class Movie {
+public class Movie implements Serializable {
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
@@ -23,15 +25,12 @@ public class Movie {
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
-    @SerializedName("popularity")
-    @Expose
-    private Double popularity;
-    @SerializedName("vote_count")
-    @Expose
-    private Integer voteCount;
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
+    @SerializedName("release_date")
+    @Expose
+    private String releaseDate;
 
     public String getPosterPath() {
         return posterPath;
@@ -53,15 +52,9 @@ public class Movie {
         return backdropPath;
     }
 
-    public Double getPopularity() {
-        return popularity;
-    }
-
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
     public Double getVoteAverage() {
         return voteAverage;
     }
+
+    public String getReleaseDate() { return releaseDate; }
 }
