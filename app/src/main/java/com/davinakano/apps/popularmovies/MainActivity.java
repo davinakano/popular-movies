@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,7 +15,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterClickHandler {
 
     private RecyclerView mRecyclerView;
     private MoviesAdapter mMoviesAdapter;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(false);
 
-        mMoviesAdapter = new MoviesAdapter(this);
+        mMoviesAdapter = new MoviesAdapter(this, this);
         mRecyclerView.setAdapter(mMoviesAdapter);
 
         // Retrofit setup
@@ -75,5 +76,10 @@ public class MainActivity extends AppCompatActivity {
     private void showErrorMessage() {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mErrorMessageTextView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onClick(Movie m) {
+        Toast.makeText(this, m.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }

@@ -21,12 +21,18 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
     private List<Movie> mMovieData;
     private Context mContext;
     private final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w185/";
+    private final MoviesAdapterClickHandler mClickHandler;
 
-    public MoviesAdapter(Context context) {
+    public MoviesAdapter(Context context, MoviesAdapterClickHandler clickHandler) {
         mContext = context;
+        mClickHandler = clickHandler;
     }
 
-    public class MoviesAdapterViewHolder extends RecyclerView.ViewHolder {
+    public interface MoviesAdapterClickHandler {
+        void onClick(Movie m);
+    }
+
+    public class MoviesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public final TextView mMovieNameTextView;
         public final ImageView mMovieCoverImageView;
@@ -35,6 +41,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
             super(itemView);
             mMovieNameTextView = (TextView) itemView.findViewById(R.id.tv_movie_name);
             mMovieCoverImageView = (ImageView) itemView.findViewById(R.id.iv_movie_cover);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            Movie m = mMovieData.get(adapterPosition);
+            mClickHandler.onClick(m);
         }
     }
 
