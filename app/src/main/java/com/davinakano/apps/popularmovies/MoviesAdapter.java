@@ -87,30 +87,4 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
         mMovieData = movieData;
         notifyDataSetChanged();
     }
-
-    public void sortByRating() {
-        if (mMovieData != null) {
-            Collections.sort(mMovieData, new Comparator<Movie>() {
-
-                @Override
-                public int compare(Movie o1, Movie o2) {
-                    return o2.getVoteAverage().compareTo(o1.getVoteAverage());
-                }
-            });
-            notifyDataSetChanged();
-        }
-    }
-
-    public void sortByReleaseDate() {
-        if (mMovieData != null) {
-            Collections.sort(mMovieData, new Comparator<Movie>() {
-
-                @Override
-                public int compare(Movie o1, Movie o2) {
-                    return o2.getReleaseDate().compareTo(o1.getReleaseDate());
-                }
-            });
-            notifyDataSetChanged();
-        }
-    }
 }

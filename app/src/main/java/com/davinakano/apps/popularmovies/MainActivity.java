@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     private TextView mErrorMessageTextView;
     private ProgressBar mLoadingProgressBar;
 
+    private NetworkUtils mNetworkUtils;
     private static final String API_KEY = BuildConfig.API_KEY;
 
     @Override
@@ -48,7 +49,12 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         mMoviesAdapter = new MoviesAdapter(this, this);
         mRecyclerView.setAdapter(mMoviesAdapter);
 
-        Call<PopularMoviesPayload> call = NetworkUtils.retrofitGetPopularMovies();
+        mNetworkUtils = new NetworkUtils();
+        getMostPopularMovies();
+    }
+
+    public void getMostPopularMovies() {
+        Call<PopularMoviesPayload> call = mNetworkUtils.retrofitGetPopularMovies();
 
         // Async call using Retrofit
         call.enqueue(new Callback<PopularMoviesPayload>() {
@@ -65,7 +71,26 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
                 showErrorMessage();
             }
         });
+    }
 
+    public void getHighestRatingMovies() {
+        Call<PopularMoviesPayload> call = mNetworkUtils.retrofitGetTopRatedMovies();
+
+        // Async call using Retrofit
+        call.enqueue(new Callback<PopularMoviesPayload>() {
+            @Override
+            public void onResponse(Call<PopularMoviesPayload> call, Response<PopularMoviesPayload> response) {
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                showMoviesDataView();
+                mMoviesAdapter.setMovieData(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<PopularMoviesPayload> call, Throwable t) {
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                showErrorMessage();
+            }
+        });
     }
 
     @Override
@@ -79,10 +104,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         int optionSelected = item.getItemId();
 
         if (optionSelected == R.id.action_sort_rating) {
-            mMoviesAdapter.sortByRating();
+            getHighestRatingMovies();
             return true;
-        } else if (optionSelected == R.id.action_sort_release_date) {
-            mMoviesAdapter.sortByReleaseDate();
+        } else if (optionSelected == R.id.action_sort_most_popular) {
+            getMostPopularMovies();
             return true;
         }
         return super.onOptionsItemSelected(item);
