@@ -24,6 +24,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // View setup
         mMovieNameTextView        = (TextView)  findViewById(R.id.tv_details_movie_original_title);
         mMoviePosterImageView     = (ImageView) findViewById(R.id.iv_details_movie_poster);
@@ -32,7 +34,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mMovieReleaseDateTextView = (TextView)  findViewById(R.id.tv_details_movie_release_date);
 
         // Get movie from Intent and assign to views
-        Movie m = (Movie) getIntent().getSerializableExtra(Intent.EXTRA_PACKAGE_NAME);
+        Movie m = getIntent().getParcelableExtra(Intent.EXTRA_PACKAGE_NAME);
         mMovieNameTextView.setText(m.getTitle());
         mMovieOverviewTextView.setText(m.getOverview());
         mMovieRatingTextView.setText(m.getVoteAverage().toString() + " / 10");

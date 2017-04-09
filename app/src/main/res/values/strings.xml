@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">Popular Movies</string>
-    <string name="menu_sort_by_rating">Sort by rating</string>
-    <string name="menu_sort_by_release_date">Sort by release date</string>
-    <string name="movie_detail_original_name_placeholder">Movie Original Name</string>
-    <string name="movie_detail_rating_placeholder">Rating</string>
-    <string name="movie_detail_overview_placeholder">Overview</string>
-    <string name="movie_detail_release_date_placeholder">Release date</string>
+    <string name="menu_sort_by_rating">Sort by highest rating</string>
+    <string name="menu_sort_by_most_popular">Sort by most popular</string>
 </resources>

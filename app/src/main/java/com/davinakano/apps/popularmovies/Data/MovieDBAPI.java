@@ -12,4 +12,7 @@ public interface MovieDBAPI {
 
     @GET("movie/popular")
     Call<PopularMoviesPayload> getPopularMovies(@Query("api_key") String apiKey);
+
+    @GET("movie/top_rated")
+    Call<PopularMoviesPayload> getTopRatedMovies(@Query("api_key") String apiKey);
 }
