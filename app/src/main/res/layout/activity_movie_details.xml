@@ -19,18 +19,18 @@
         android:id="@+id/tv_details_movie_original_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/movie_detail_original_name_placeholder"
-        android:textSize="30sp"
-        android:textColor="@android:color/white"
+        tools:text="My awesome movie"
+        android:textSize="@dimen/text_size_large"
+        android:textColor="@color/colorText"
         android:layout_margin="16dp"/>
 
     <TextView
         android:id="@+id/tv_details_movie_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/movie_detail_rating_placeholder"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
+        tools:text="5 / 10"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/colorText"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"/>
 
@@ -38,17 +38,18 @@
         android:id="@+id/tv_details_movie_release_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/movie_detail_release_date_placeholder"
-        android:textColor="@android:color/white"
+        tools:text="10/02/2017"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/colorText"
         android:layout_marginLeft="16dp"/>
 
     <TextView
         android:id="@+id/tv_details_movie_overview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/movie_detail_overview_placeholder"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
+        tools:text="This is an awesome movie that requires a lot of awesomeness"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="@color/colorText"
         android:layout_margin="16dp"/>
 
 </LinearLayout>
