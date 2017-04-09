@@ -34,7 +34,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mMovieReleaseDateTextView = (TextView)  findViewById(R.id.tv_details_movie_release_date);
 
         // Get movie from Intent and assign to views
-        Movie m = (Movie) getIntent().getSerializableExtra(Intent.EXTRA_PACKAGE_NAME);
+        Movie m = getIntent().getParcelableExtra(Intent.EXTRA_PACKAGE_NAME);
         mMovieNameTextView.setText(m.getTitle());
         mMovieOverviewTextView.setText(m.getOverview());
         mMovieRatingTextView.setText(m.getVoteAverage().toString() + " / 10");
