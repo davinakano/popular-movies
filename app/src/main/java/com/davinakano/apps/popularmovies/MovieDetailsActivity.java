@@ -24,6 +24,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // View setup
         mMovieNameTextView        = (TextView)  findViewById(R.id.tv_details_movie_original_title);
         mMoviePosterImageView     = (ImageView) findViewById(R.id.iv_details_movie_poster);
