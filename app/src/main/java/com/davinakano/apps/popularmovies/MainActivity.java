@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     private ProgressBar mLoadingProgressBar;
 
     private NetworkUtils mNetworkUtils;
-    private static final String API_KEY = BuildConfig.API_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
