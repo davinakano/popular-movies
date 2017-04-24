@@ -1,4 +1,7 @@
-package com.davinakano.apps.popularmovies.Data;
+package com.davinakano.apps.popularmovies.Network.Utils;
+
+import com.davinakano.apps.popularmovies.Network.MovieDBAPI;
+import com.davinakano.apps.popularmovies.Network.PopularMoviesPayload;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -23,11 +26,14 @@ public class NetworkUtils {
         mClient = retrofit.create(MovieDBAPI.class);
     }
 
-    public Call<PopularMoviesPayload> retrofitGetPopularMovies() {
-        return mClient.getPopularMovies(API_KEY);
-    }
+    public Call<PopularMoviesPayload> retrofitGetMovies(MovieDBTypes type) {
+        switch (type) {
+            case TOP_RATED:
+                return mClient.getTopRatedMovies(API_KEY);
+            case POPULAR:
+                return mClient.getPopularMovies(API_KEY);
+        }
 
-    public Call<PopularMoviesPayload> retrofitGetTopRatedMovies() {
-        return mClient.getTopRatedMovies(API_KEY);
+        return null;
     }
 }

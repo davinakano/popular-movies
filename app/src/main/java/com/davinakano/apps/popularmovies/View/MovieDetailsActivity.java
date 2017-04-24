@@ -1,4 +1,4 @@
-package com.davinakano.apps.popularmovies;
+package com.davinakano.apps.popularmovies.View;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.davinakano.apps.popularmovies.Data.Movie;
+import com.davinakano.apps.popularmovies.Model.Movie;
+import com.davinakano.apps.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
 public class MovieDetailsActivity extends AppCompatActivity {

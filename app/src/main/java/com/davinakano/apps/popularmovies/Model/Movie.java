@@ -1,12 +1,10 @@
-package com.davinakano.apps.popularmovies.Data;
+package com.davinakano.apps.popularmovies.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 
 /**
  * Created by davinakano on 02/04/2017.

@@ -1,4 +1,4 @@
-package com.davinakano.apps.popularmovies;
+package com.davinakano.apps.popularmovies.View.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.davinakano.apps.popularmovies.Data.Movie;
+import com.davinakano.apps.popularmovies.Model.Movie;
+import com.davinakano.apps.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**

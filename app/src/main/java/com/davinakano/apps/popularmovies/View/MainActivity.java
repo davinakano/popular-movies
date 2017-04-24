@@ -1,4 +1,4 @@
-package com.davinakano.apps.popularmovies;
+package com.davinakano.apps.popularmovies.View;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +11,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.davinakano.apps.popularmovies.Data.Movie;
-import com.davinakano.apps.popularmovies.Data.NetworkUtils;
-import com.davinakano.apps.popularmovies.Data.PopularMoviesPayload;
+import com.davinakano.apps.popularmovies.Model.Movie;
+import com.davinakano.apps.popularmovies.Network.Utils.MovieDBTypes;
+import com.davinakano.apps.popularmovies.Network.Utils.NetworkUtils;
+import com.davinakano.apps.popularmovies.Network.PopularMoviesPayload;
+import com.davinakano.apps.popularmovies.R;
+import com.davinakano.apps.popularmovies.View.Adapter.MoviesAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,31 +52,11 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         mRecyclerView.setAdapter(mMoviesAdapter);
 
         mNetworkUtils = new NetworkUtils();
-        getMostPopularMovies();
+        getMoviesByType(MovieDBTypes.POPULAR);
     }
 
-    public void getMostPopularMovies() {
-        Call<PopularMoviesPayload> call = mNetworkUtils.retrofitGetPopularMovies();
-
-        // Async call using Retrofit
-        call.enqueue(new Callback<PopularMoviesPayload>() {
-            @Override
-            public void onResponse(Call<PopularMoviesPayload> call, Response<PopularMoviesPayload> response) {
-                mLoadingProgressBar.setVisibility(View.INVISIBLE);
-                showMoviesDataView();
-                mMoviesAdapter.setMovieData(response.body().getResults());
-            }
-
-            @Override
-            public void onFailure(Call<PopularMoviesPayload> call, Throwable t) {
-                mLoadingProgressBar.setVisibility(View.INVISIBLE);
-                showErrorMessage();
-            }
-        });
-    }
-
-    public void getHighestRatingMovies() {
-        Call<PopularMoviesPayload> call = mNetworkUtils.retrofitGetTopRatedMovies();
+    public void getMoviesByType(MovieDBTypes queryType) {
+        Call<PopularMoviesPayload> call = mNetworkUtils.retrofitGetMovies(queryType);
 
         // Async call using Retrofit
         call.enqueue(new Callback<PopularMoviesPayload>() {
@@ -103,10 +86,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         int optionSelected = item.getItemId();
 
         if (optionSelected == R.id.action_sort_rating) {
-            getHighestRatingMovies();
+            getMoviesByType(MovieDBTypes.TOP_RATED);
             return true;
         } else if (optionSelected == R.id.action_sort_most_popular) {
-            getMostPopularMovies();
+            getMoviesByType(MovieDBTypes.POPULAR);
             return true;
         }
         return super.onOptionsItemSelected(item);

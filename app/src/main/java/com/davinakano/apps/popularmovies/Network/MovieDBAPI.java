@@ -1,4 +1,4 @@
-package com.davinakano.apps.popularmovies.Data;
+package com.davinakano.apps.popularmovies.Network;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
